@@ -3,132 +3,111 @@ import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 import SectionTitle from './SectionTitle';
 import { projects } from '../data/portfolioData';
 
-// Mini architecture diagram inside the placeholder
-const ProjectVisual = ({ project, index }) => {
-    const diagrams = [
-        ['API Gateway', 'Wallet Service', 'Kafka', 'Redis', 'Saga Pattern'],
-        ['JWT Filter', 'TaskTrie', 'WebSocket', 'RBAC', 'Scheduler'],
-        ['Workspace', 'Document', 'Block Tree', 'RBAC', 'PostgreSQL'],
-    ];
-    const nodes = diagrams[index] || diagrams[0];
-
-    return (
-        <div className="project-card__visual">
-            <div className="project-card__image-wrapper">
-                <div className="project-card__overlay"></div>
-                {project.image ? (
-                    <img
-                        src={project.image}
-                        alt={`${project.title} screenshot`}
-                        className="project-card__screenshot"
-                    />
-                ) : (
-                    <div className="project-card__arch-diagram">
-                        <span className="project-card__arch-title">{project.title}</span>
-                        <div className="project-card__arch-nodes">
-                            {nodes.map((node, i) => (
-                                <motion.span
-                                    key={i}
-                                    className="project-card__arch-node"
-                                    initial={{ opacity: 0, scale: 0.8 }}
-                                    whileInView={{ opacity: 1, scale: 1 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: 0.3 + i * 0.08 }}
-                                >
-                                    {node}
-                                </motion.span>
-                            ))}
-                        </div>
+const ProjectCard = ({ project, index }) => (
+    <motion.div
+        className="project-grid-card"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.15 }}
+        transition={{ duration: 0.5, delay: index * 0.08 }}
+        whileHover="hover"
+    >
+        {/* Image / Visual */}
+        <div className="project-grid-card__img-wrap">
+            {project.image ? (
+                <motion.img
+                    src={project.image}
+                    alt={`${project.title} screenshot`}
+                    className="project-grid-card__img"
+                    variants={{
+                        hover: { scale: 1.07 },
+                    }}
+                    transition={{ duration: 0.4 }}
+                />
+            ) : (
+                /* Fallback: stylised arch diagram */
+                <div className="project-grid-card__fallback">
+                    <span className="project-grid-card__fallback-title">{project.title}</span>
+                    <div className="project-grid-card__fallback-nodes">
+                        {project.tech.slice(0, 5).map((t, i) => (
+                            <span key={i} className="project-grid-card__fallback-node">{t}</span>
+                        ))}
                     </div>
-                )}
-            </div>
-            <div className="project-card__glow"></div>
-        </div>
-    );
-};
-
-const Projects = () => {
-    return (
-        <section id="projects" className="section section--alt">
-            <div className="container">
-                <SectionTitle number="03.">Engineering Projects</SectionTitle>
-
-                <div className="projects__list">
-                    {projects.map((project, index) => (
-                        <motion.div
-                            key={index}
-                            className={`project-card ${index % 2 === 1 ? 'project-card--reversed' : ''}`}
-                            initial={{ opacity: 0, y: 50 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, amount: 0.15 }}
-                            transition={{ duration: 0.6, delay: index * 0.1 }}
-                        >
-                            {/* Visual */}
-                            <ProjectVisual project={project} index={index} />
-
-                            {/* Content */}
-                            <div className="project-card__content">
-                                <p className="project-card__label">
-                                    {String(index + 1).padStart(2, '0')} / {String(projects.length).padStart(2, '0')}
-                                </p>
-                                <h3 className="project-card__title">{project.title}</h3>
-                                <p style={{
-                                    fontFamily: 'var(--font-mono)',
-                                    fontSize: '0.85rem',
-                                    color: 'var(--accent-2)',
-                                    marginBottom: '16px',
-                                    fontWeight: 500
-                                }}>
-                                    {project.subtitle}
-                                </p>
-
-                                <div className="project-card__description glass-card">
-                                    <ul>
-                                        {project.description.map((point, i) => (
-                                            <li key={i}>{point}</li>
-                                        ))}
-                                    </ul>
-                                </div>
-
-                                {/* Tech Stack */}
-                                <ul className="project-card__tech">
-                                    {project.tech.map((tech, i) => (
-                                        <li key={i} className="project-card__tech-tag">{tech}</li>
-                                    ))}
-                                </ul>
-
-                                {/* Links */}
-                                <div className="project-card__links">
-                                    {project.githubLink !== undefined && (
-                                        <a
-                                            href={project.githubLink || '#'}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="project-card__link"
-                                        >
-                                            <FaGithub className="project-card__link-icon" size={18} />
-                                            <span>Source</span>
-                                        </a>
-                                    )}
-                                    {project.liveLink !== undefined && (
-                                        <a
-                                            href={project.liveLink || '#'}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="project-card__link"
-                                        >
-                                            <FaExternalLinkAlt className="project-card__link-icon" size={16} />
-                                            <span>Live</span>
-                                        </a>
-                                    )}
-                                </div>
-                            </div>
-                        </motion.div>
-                    ))}
                 </div>
+            )}
+
+            {/* Gradient overlay on hover */}
+            <motion.div
+                className="project-grid-card__overlay"
+                initial={{ opacity: 0.45 }}
+                variants={{ hover: { opacity: 0.72 } }}
+                transition={{ duration: 0.3 }}
+            />
+
+            {/* Title block pinned to bottom (always visible) */}
+            <div className="project-grid-card__label-block">
+                <h3 className="project-grid-card__title">{project.title}</h3>
+                <p className="project-grid-card__subtitle">{project.subtitle}</p>
             </div>
-        </section>
-    );
-};
+
+            {/* Action links — slide up on hover */}
+            <motion.div
+                className="project-grid-card__actions"
+                initial={{ y: 60, opacity: 0 }}
+                variants={{ hover: { y: 0, opacity: 1 } }}
+                transition={{ duration: 0.3 }}
+            >
+                {project.githubLink !== undefined && (
+                    <a
+                        href={project.githubLink || '#'}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="project-grid-card__action-btn"
+                        onClick={e => e.stopPropagation()}
+                    >
+                        <FaGithub size={15} /> Source
+                    </a>
+                )}
+                {project.liveLink !== undefined && (
+                    <a
+                        href={project.liveLink || '#'}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="project-grid-card__action-btn project-grid-card__action-btn--live"
+                        onClick={e => e.stopPropagation()}
+                    >
+                        <FaExternalLinkAlt size={13} /> Live
+                    </a>
+                )}
+            </motion.div>
+        </div>
+
+        {/* Tech tags below the card */}
+        <div className="project-grid-card__tech">
+            {project.tech.slice(0, 4).map((t, i) => (
+                <span key={i} className="project-grid-card__tech-tag">{t}</span>
+            ))}
+            {project.tech.length > 4 && (
+                <span className="project-grid-card__tech-tag project-grid-card__tech-tag--more">
+                    +{project.tech.length - 4}
+                </span>
+            )}
+        </div>
+    </motion.div>
+);
+
+const Projects = () => (
+    <section id="projects" className="section">
+        <div className="container">
+            <SectionTitle number="03.">Engineering Projects</SectionTitle>
+
+            <div className="project-grid">
+                {projects.map((project, index) => (
+                    <ProjectCard key={index} project={project} index={index} />
+                ))}
+            </div>
+        </div>
+    </section>
+);
 
 export default Projects;

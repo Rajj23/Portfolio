@@ -1,41 +1,13 @@
-import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import SectionTitle from './SectionTitle';
 import { skills } from '../data/portfolioData';
 
-const SkillCategory = ({ category, delayOffset }) => (
-    <motion.div
-        className="skills__category"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ delay: delayOffset, duration: 0.5 }}
-    >
-        <h3 className="skills__category-title">
-            <span className="skills__category-line"></span>
-            {category.title}
-        </h3>
-
-        <div className="skills__grid">
-            {category.items.map((skill, index) => (
-                <motion.div
-                    key={index}
-                    className="skills__item glass-card"
-                    whileHover={{ scale: 1.05, y: -4 }}
-                    initial={{ opacity: 0, y: 15 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: delayOffset + index * 0.03 }}
-                >
-                    <span className="skills__item-icon">{skill.icon}</span>
-                    <span className="skills__item-name">{skill.name}</span>
-                </motion.div>
-            ))}
-        </div>
-    </motion.div>
-);
+const categories = Object.values(skills);
 
 const Skills = () => {
-    const categories = Object.values(skills);
+    const [activeTab, setActiveTab] = useState(0);
+    const currentCategory = categories[activeTab];
 
     return (
         <section id="skills" className="section" style={{ position: 'relative' }}>
@@ -45,15 +17,45 @@ const Skills = () => {
             <div className="container" style={{ position: 'relative', zIndex: 1 }}>
                 <SectionTitle number="02.">Technical Skills</SectionTitle>
 
-                <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
-                    {categories.map((category, index) => (
-                        <SkillCategory
-                            key={category.title}
-                            category={category}
-                            delayOffset={0.1 + index * 0.1}
-                        />
+                {/* Tab Bar */}
+                <div className="skills__tabs">
+                    {categories.map((cat, i) => (
+                        <button
+                            key={cat.title}
+                            className={`skills__tab ${activeTab === i ? 'skills__tab--active' : ''}`}
+                            onClick={() => setActiveTab(i)}
+                        >
+                            {cat.title}
+                        </button>
                     ))}
                 </div>
+
+                {/* Skills Grid */}
+                <AnimatePresence mode="wait">
+                    <motion.div
+                        key={activeTab}
+                        initial={{ opacity: 0, y: 16 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ duration: 0.3 }}
+                        className="skills__grid skills__grid--tab"
+                        style={{ maxWidth: '1000px', margin: '0 auto' }}
+                    >
+                        {currentCategory.items.map((skill, index) => (
+                            <motion.div
+                                key={`${activeTab}-${index}`}
+                                className="skills__item glass-card"
+                                whileHover={{ scale: 1.07, y: -5 }}
+                                initial={{ opacity: 0, y: 15 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: index * 0.04 }}
+                            >
+                                <span className="skills__item-icon">{skill.icon}</span>
+                                <span className="skills__item-name">{skill.name}</span>
+                            </motion.div>
+                        ))}
+                    </motion.div>
+                </AnimatePresence>
             </div>
         </section>
     );

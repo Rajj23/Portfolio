@@ -3,11 +3,13 @@ import { Link } from 'react-scroll';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { personalInfo } from '../data/portfolioData';
+import ThemeToggle from './ThemeToggle';
 
 const navLinks = [
     { name: 'About', to: 'about' },
     { name: 'Skills', to: 'skills' },
     { name: 'Projects', to: 'projects' },
+    { name: 'Achievements', to: 'achievements' },
     { name: 'GitHub', to: 'github' },
     { name: 'Contact', to: 'contact' },
 ];
@@ -62,6 +64,7 @@ const Navbar = () => {
                             </motion.span>
                         </Link>
                     ))}
+                    <ThemeToggle />
                     <motion.a
                         href={personalInfo.resumeLink}
                         target="_blank"
@@ -107,6 +110,7 @@ const Navbar = () => {
                                 {link.name}
                             </Link>
                         ))}
+                        <ThemeToggle />
                         <a
                             href={personalInfo.resumeLink}
                             target="_blank"

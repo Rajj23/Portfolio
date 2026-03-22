@@ -1,12 +1,12 @@
 import {
   FaJava, FaPython, FaDocker, FaGitAlt, FaGithub, FaLinkedin, FaInstagram, FaAws,
-  FaDatabase, FaEnvelope, FaGlobe, FaCertificate
+  FaDatabase, FaEnvelope, FaGlobe, FaCloud, FaProjectDiagram
 } from 'react-icons/fa';
 import {
   SiSpring, SiSpringboot, SiSpringsecurity, SiApachekafka, SiPostgresql, SiMysql,
   SiRedis, SiNumpy, SiPandas, SiHtml5, SiCss3, SiJavascript, SiIntellijidea,
   SiPostman, SiApachemaven, SiHibernate, SiCplusplus,
-  SiAmazons3, SiAmazonec2, SiOracle
+  SiAmazons3, SiAmazonec2, SiOracle, SiScikitlearn, SiTensorflow
 } from 'react-icons/si';
 import { VscCode } from 'react-icons/vsc';
 import { TbApi, TbBrandLeetcode } from 'react-icons/tb';
@@ -26,7 +26,7 @@ export const personalInfo = {
   leetcode: 'https://leetcode.com/u/Rajjaiswal23_27/',
   gfg: 'https://www.geeksforgeeks.org/profile/rajjaiswal23',
   website: 'https://rajjaiswal.online',
-  resumeLink: '/Raj_Jaiswal_Resume.pdf',
+  resumeLink: '/Raj_Jaiswal_Spec.pdf',
 };
 
 export const stats = [
@@ -40,11 +40,29 @@ export const certifications = [
     title: 'AWS Certified Cloud Practitioner',
     issuer: 'Amazon Web Services',
     icon: <FaAws />,
+    date: 'Feb 2026',
+    link: 'https://www.credly.com/badges/fe779128-1ce9-41e6-84c2-4be39c5b90c9/public_url',
   },
   {
     title: 'OCI AI Foundations Associate',
     issuer: 'Oracle',
     icon: <SiOracle />,
+    date: 'Oct 2025',
+    link: 'https://drive.google.com/file/d/1HFsCzCKDEwz1IGKhuqB3ZHH_vsDVsmDF/view',
+  },
+  {
+    title: 'Mastering Data Structures and Algorithms',
+    issuer: 'Lovely Professional University',
+    icon: <FaProjectDiagram />,
+    date: 'July 2025',
+    link: 'https://drive.google.com/file/d/1TNhPbYRdMZxd0phDTXc4X0VQKPP6qxtg/view?usp=sharing',
+  },
+  {
+    title: 'Cloud Computing',
+    issuer: 'NPTEL',
+    icon: <FaCloud />,
+    date: 'Apr 2025',
+    link: 'https://archive.nptel.ac.in/content/noc/NOC25/SEM1/Ecertificates/106/noc25-cs11/Course/NPTEL25CS11S143730146604237275.pdf',
   },
 ];
 
@@ -53,16 +71,19 @@ export const education = [
     institution: 'Lovely Professional University',
     degree: 'B.Tech in Computer Science & Engineering',
     duration: '2023 — 2027',
+    score: 'CGPA: 7.41',
   },
   {
     institution: 'Herman Gmeiner School, Varanasi',
     degree: 'Intermediate (XII)',
     duration: '2020 — 2022',
+    score: 'Percentage: 62%',
   },
   {
     institution: 'St. Xavier High School, Mau',
     degree: 'Matriculation (X)',
     duration: '2018 — 2020',
+    score: 'Percentage: 68%',
   },
 ];
 
@@ -87,8 +108,15 @@ export const skills = {
       { name: 'JWT', icon: <TbApi /> },
       { name: 'Microservices', icon: <TbApi /> },
       { name: 'RBAC', icon: <TbApi /> },
-      { name: 'NumPy', icon: <SiNumpy /> },
+    ]
+  },
+  aiml: {
+    title: 'AI & ML',
+    items: [
+      { name: 'Scikit-learn', icon: <SiScikitlearn /> },
+      { name: 'TensorFlow', icon: <SiTensorflow /> },
       { name: 'Pandas', icon: <SiPandas /> },
+      { name: 'NumPy', icon: <SiNumpy /> },
     ]
   },
   databases: {
@@ -122,6 +150,44 @@ export const skills = {
     ]
   }
 };
+
+export const achievements = [
+  {
+    title: 'LeetCode Contest Rating 1586',
+    description: 'Achieved top 25.41% globally in LeetCode contests.',
+    date: 'March 2026',
+    platform: 'LeetCode',
+    icon: <TbBrandLeetcode />
+  },
+  {
+    title: 'LeetCode 680+ Questions Solved',
+    description: 'Consistently solving data structure and algorithmic problems.',
+    date: 'Feb 2026',
+    platform: 'LeetCode',
+    icon: <TbBrandLeetcode />
+  },
+  {
+    title: 'GeeksforGeeks 130+ Problems Solved',
+    description: 'Practicing algorithmic problem solving on GeeksforGeeks.',
+    date: 'Feb 2026',
+    platform: 'GeeksforGeeks',
+    icon: <VscCode />
+  },
+  {
+    title: '5 Star Rank in Java',
+    description: 'Achieved 5-star golden badge in Java problem solving.',
+    date: 'Feb 2026',
+    platform: 'HackerRank',
+    icon: <FaJava />
+  },
+  {
+    title: '5 Star Rank in Python',
+    description: 'Achieved 5-star golden badge in Python problem solving.',
+    date: 'March 2026',
+    platform: 'HackerRank',
+    icon: <FaPython />
+  }
+];
 
 export const projects = [
   {
