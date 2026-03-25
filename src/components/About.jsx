@@ -14,28 +14,43 @@ const About = () => {
             <div className="container">
                 <SectionTitle number="01.">About Me</SectionTitle>
 
-                <motion.div
-                    className="about__bio-container"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.3 }}
-                    transition={{ duration: 0.6 }}
-                >
-                    <p className="about__bio">
-                        I'm a Computer Science undergraduate focused on{' '}
-                        <span className="about__bio-highlight">backend engineering</span> and{' '}
-                        <span className="about__bio-highlight">distributed systems</span>. I work primarily with Java and the Spring ecosystem to design services that are modular, fault-tolerant, and built for scale — from event-driven payment pipelines to real-time collaboration platforms.
-                    </p>
-                    <p className="about__bio">
-                        I've engineered <span className="about__bio-highlight">microservices architectures</span> with Apache Kafka for asynchronous communication, implemented <span className="about__bio-highlight">idempotent transaction handling</span> for financial systems, and designed <span className="about__bio-highlight">recursive data models</span> for complex content hierarchies. My approach to software is rooted in clean architecture, system design thinking, and writing code that other engineers can confidently build on.
-                    </p>
-                    <p className="about__bio">
-                        Beyond backend, I'm certified as an{' '}
-                        <span className="about__bio-highlight">AWS Cloud Practitioner</span> and an{' '}
-                        <span className="about__bio-highlight">OCI AI Foundations Associate</span>, and actively work with cloud-native tooling — Docker, EC2, S3, and API Gateway. I've solved{' '}
-                        <span className="about__bio-highlight">{leetcodeCount ? leetcodeCount : '680'}+ data structures and algorithms problems</span> across LeetCode and GeeksforGeeks, sharpening the problem-solving instincts that drive every system I build.
-                    </p>
-                </motion.div>
+                <div className="about__content">
+                    <motion.div
+                        className="about__image-container"
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true, amount: 0.3 }}
+                        transition={{ duration: 0.6, delay: 0.2 }}
+                    >
+                        <div className="about__image-backdrop"></div>
+                        <div className="about__image-wrapper">
+                            <img src="/profile.jpeg" alt="Raj Jaiswal" className="about__image" />
+                        </div>
+                    </motion.div>
+
+                    <motion.div
+                        className="about__bio-container"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.3 }}
+                        transition={{ duration: 0.6 }}
+                    >
+                        <p className="about__bio">
+                            I'm a Computer Science undergraduate focused on{' '}
+                            <span className="about__bio-highlight">backend engineering</span> and{' '}
+                            <span className="about__bio-highlight">distributed systems</span>. I work primarily with Java and the Spring ecosystem to design services that are modular, fault-tolerant, and built for scale — from event-driven payment pipelines to real-time collaboration platforms.
+                        </p>
+                        <p className="about__bio">
+                            I've engineered <span className="about__bio-highlight">microservices architectures</span> with Apache Kafka for asynchronous communication, implemented <span className="about__bio-highlight">idempotent transaction handling</span> for financial systems, and designed <span className="about__bio-highlight">recursive data models</span> for complex content hierarchies. My approach to software is rooted in clean architecture, system design thinking, and writing code that other engineers can confidently build on.
+                        </p>
+                        <p className="about__bio">
+                            Beyond backend, I'm certified as an{' '}
+                            <span className="about__bio-highlight">AWS Cloud Practitioner</span> and an{' '}
+                            <span className="about__bio-highlight">OCI AI Foundations Associate</span>, and actively work with cloud-native tooling — Docker, EC2, S3, and API Gateway. I've solved{' '}
+                            <span className="about__bio-highlight">{leetcodeCount ? leetcodeCount : '680'}+ data structures and algorithms problems</span> across LeetCode and GeeksforGeeks, sharpening the problem-solving instincts that drive every system I build.
+                        </p>
+                    </motion.div>
+                </div>
 
                 {/* Stats */}
                 <motion.div

@@ -33,8 +33,8 @@
   --star-color: rgba(255, 255, 255, 0.7);
   --cta-primary-bg: #fff;
   --cta-primary-color: #0F172A;
-  --cta-primary-shadow: rgba(255,255,255,0.1);
-  --cta-primary-shadow-hover: rgba(255,255,255,0.25);
+  --cta-primary-shadow: rgba(255, 255, 255, 0.1);
+  --cta-primary-shadow-hover: rgba(255, 255, 255, 0.25);
 }
 
 /* ===== Light Theme ===== */
@@ -61,8 +61,8 @@
   --star-color: rgba(15, 23, 42, 0.12);
   --cta-primary-bg: #0F172A;
   --cta-primary-color: #F8FAFC;
-  --cta-primary-shadow: rgba(15,23,42,0.15);
-  --cta-primary-shadow-hover: rgba(15,23,42,0.3);
+  --cta-primary-shadow: rgba(15, 23, 42, 0.15);
+  --cta-primary-shadow-hover: rgba(15, 23, 42, 0.3);
 }
 
 
@@ -407,8 +407,17 @@ button {
 }
 
 @keyframes starTwinkle {
-  0%, 100% { opacity: 0.15; transform: scale(1); }
-  50% { opacity: 0.9; transform: scale(1.4); }
+
+  0%,
+  100% {
+    opacity: 0.15;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.9;
+    transform: scale(1.4);
+  }
 }
 
 /* Ambient blobs */
@@ -636,9 +645,86 @@ button {
 }
 
 /* ===== About Section ===== */
+.about__content {
+  display: flex;
+  gap: 48px;
+  align-items: center;
+  margin-bottom: 60px;
+}
+
 .about__bio-container {
-  max-width: 800px;
-  margin: 0 auto 60px;
+  flex: 1.5;
+}
+
+.about__image-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+.about__image-wrapper {
+  position: relative;
+  width: 100%;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 4px solid var(--bg-secondary);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transition: var(--transition-base);
+  z-index: 2;
+}
+
+.about__image-wrapper::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 212, 255, 0.15);
+  transition: var(--transition-base);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.about__image-wrapper:hover::after {
+  background: transparent;
+}
+
+.about__image-wrapper:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent-1);
+  box-shadow: 0 15px 35px rgba(0, 212, 255, 0.2);
+}
+
+.about__image {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+  filter: grayscale(100%) contrast(1.1);
+  transition: var(--transition-base);
+}
+
+.about__image-wrapper:hover .about__image {
+  filter: grayscale(0%) contrast(1);
+}
+
+.about__image-backdrop {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 100%;
+  height: 100%;
+  border: 2px solid var(--accent-1);
+  border-radius: 14px;
+  z-index: 1;
+  transition: var(--transition-base);
+}
+
+.about__image-container:hover .about__image-backdrop {
+  top: 15px;
+  left: 15px;
 }
 
 .about__bio {
@@ -782,6 +868,24 @@ button {
   border-radius: 6px;
   display: inline-block;
   margin-bottom: 4px;
+}
+
+@media (max-width: 900px) {
+  .about__content {
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+  }
+  .about__bio-container {
+    width: 100%;
+  }
+  .about__image-container {
+    margin-bottom: 20px;
+    width: 100%;
+  }
+  .about__image-wrapper {
+    max-width: 280px;
+  }
 }
 
 /* ===== Skills Section ===== */
@@ -977,7 +1081,7 @@ button {
   display: flex;
   gap: 10px;
   z-index: 3;
-  background: linear-gradient(to top, rgba(5,5,20,0.98) 70%, transparent);
+  background: linear-gradient(to top, rgba(5, 5, 20, 0.98) 70%, transparent);
 }
 
 .project-grid-card__action-btn {
@@ -991,7 +1095,7 @@ button {
   font-weight: 600;
   color: var(--text-primary);
   border: 1px solid var(--border-subtle);
-  background: rgba(255,255,255, 0.05);
+  background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(8px);
   transition: var(--transition-base);
   cursor: pointer;
@@ -1020,7 +1124,7 @@ button {
   font-family: var(--font-mono);
   font-size: 0.72rem;
   color: var(--text-secondary);
-  background: rgba(255,255,255, 0.04);
+  background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--border-subtle);
   padding: 3px 10px;
   border-radius: 4px;
@@ -1037,7 +1141,9 @@ button {
 }
 
 /* Old alternating layout gone — kept below as dead class to not break things */
-.project-card { display: none; }
+.project-card {
+  display: none;
+}
 
 .project-card__visual {
   flex: 1.2;
@@ -1772,7 +1878,7 @@ button {
   line-height: 1;
   font-family: var(--font-body);
   letter-spacing: -1px;
-  text-shadow: 0 2px 12px rgba(0,0,0,0.2);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
 }
 
 .stats-banner__label {
