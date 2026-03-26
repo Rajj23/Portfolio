@@ -5,7 +5,7 @@ import useLeetCodeStats from '../hooks/useLeetCodeStats';
 import useGeeksForGeeksStats from '../hooks/useGeeksForGeeksStats';
 
 const Achievements = () => {
-    const { solvedCount, contestRating } = useLeetCodeStats('Rajjaiswal23_27');
+    const { solvedCount, contestRating, topPercentage } = useLeetCodeStats('Rajjaiswal23_27');
     const { solvedCount: gfgCount } = useGeeksForGeeksStats('rajjaiswal23');
     const currentMonthYear = new Intl.DateTimeFormat('en-US', { month: 'long', year: 'numeric' }).format(new Date());
 
@@ -18,13 +18,15 @@ const Achievements = () => {
                     {achievements.map((item, index) => {
                         let dynamicTitle = item.title;
                         let dynamicDate = item.date;
+                        let dynamicDescription = item.description;
 
                         if (item.platform === 'LeetCode' || item.platform === 'GeeksforGeeks') {
                             dynamicDate = currentMonthYear;
                         }
 
-                        if (item.title.includes('Contest Rating') && contestRating) {
-                            dynamicTitle = `LeetCode Contest Rating ${contestRating}`;
+                        if (item.title.includes('Contest Rating')) {
+                            if (contestRating) dynamicTitle = `LeetCode Contest Rating ${contestRating}`;
+                            if (topPercentage) dynamicDescription = `Achieved top ${topPercentage}% globally in LeetCode contests.`;
                         } else if (item.title.includes('Questions Solved') && item.platform === 'LeetCode' && solvedCount) {
                             dynamicTitle = `LeetCode ${solvedCount}+ Questions Solved`;
                         } else if (item.title.includes('Problems Solved') && item.platform === 'GeeksforGeeks' && gfgCount) {
@@ -51,7 +53,7 @@ const Achievements = () => {
                                 </span>
                             </div>
                             <h3 style={{ fontSize: '1.2rem', color: 'var(--text-primary)', marginTop: '8px', lineHeight: '1.4' }}>{dynamicTitle}</h3>
-                            <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.6', flex: 1 }}>{item.description}</p>
+                            <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.6', flex: 1 }}>{dynamicDescription}</p>
                             <div style={{ marginTop: 'auto', paddingTop: '16px', borderTop: '1px solid var(--border-subtle)', fontSize: '0.85rem', color: 'var(--accent-1)', fontWeight: '600' }}>
                                 {item.platform}
                             </div>

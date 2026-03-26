@@ -19,6 +19,7 @@ const query = `
     }
     userContestRanking(username: $username) {
       rating
+      topPercentage
     }
   }
 `;
@@ -27,6 +28,7 @@ export const useLeetCodeStats = (username) => {
   const [stats, setStats] = useState({
     solvedCount: null,
     contestRating: null,
+    topPercentage: null,
     loading: true,
     error: null,
   });
@@ -63,10 +65,12 @@ export const useLeetCodeStats = (username) => {
         
         // Extract contest rating
         const rating = data.userContestRanking?.rating ? Math.round(data.userContestRanking.rating) : null;
+        const topPercentage = data.userContestRanking?.topPercentage ? data.userContestRanking.topPercentage : null;
 
         setStats({
           solvedCount: totalSolved,
           contestRating: rating,
+          topPercentage: topPercentage,
           loading: false,
           error: null,
         });
