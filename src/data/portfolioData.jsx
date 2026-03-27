@@ -26,7 +26,7 @@ export const personalInfo = {
   leetcode: 'https://leetcode.com/u/Rajjaiswal23_27/',
   gfg: 'https://www.geeksforgeeks.org/profile/rajjaiswal23',
   website: 'https://rajjaiswal.online',
-  resumeLink: '/Raj_Jaiswal_Spec.pdf',
+  resumeLink: '/Raj cv.pdf',
 };
 
 export const stats = [
