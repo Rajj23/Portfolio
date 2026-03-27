@@ -24,7 +24,7 @@ const About = () => {
                     >
                         <div className="about__image-backdrop"></div>
                         <div className="about__image-wrapper">
-                            <img src="/profile.jpeg" alt="Raj Jaiswal" className="about__image" />
+                            <img src="/profile.png" alt="Raj Jaiswal" className="about__image" />
                         </div>
                     </motion.div>
 
